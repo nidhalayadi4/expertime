@@ -1,0 +1,58 @@
+.donation-product-listing {
+    margin:0!important;
+}
+
+.donation-product-listing  .product-item-details {
+    text-align: center;
+}
+
+.donation-product-listing  .product-item-name {
+    font-weight: bold;
+}
+
+.donation-product-listing  .description {
+    font-style: italic;
+}
+
+.donation-product-listing .product-item-actions .input-amount{
+    margin: 10px 0 10px 0;
+}
+
+.donation-product-listing .product-item-actions .input-amount input{
+    max-width: 50%;
+    padding: 0 17px 0 16px;
+    display: inline-block;
+    text-align: right;
+    border-radius: 5px;
+    margin-left: 12px;
+}
+
+.donation-product-listing .product-item-actions .input-amount span {
+    position: relative;
+    right: 21px;
+    padding: 0 0 0 2px;
+}
+
+.donation-product-listing .product-item-actions .tocart{
+    border-radius: 3px;
+}
+
+.donation-product-listing .product-item-actions .remove{
+    color: #fff;
+    border: none;
+    background-color: #e03131f7;
+}
+
+.donation-product-listing .messages {
+    max-width: 70%;
+    margin: 10px auto;
+}
+
+.donation-product-listing .messages .message{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.donation-product-listing .messages .no-display {
+    display:none;
+}

@@ -1,0 +1,95 @@
+<?php
+
+/* @var $block Expertime\Donation\Block\Frontend\Product\Listing */
+$isActive = $block->isActive();
+$donationProductInCheckoutIds = $block->getDonationProductIds();
+$imageThumbnailId = 'category_page_grid';
+$imageDetailId = 'category_page_grid';
+?>
+<?php if ($isActive) : ?>
+    <div class="clearfix"></div>
+    <div class="block crosssell donation-product-listing">
+        <div class="title">
+            <h3><em>Donation Product :</em></h3>
+        </div>
+        <div class="products wrapper grid products-grid products-crosssell">
+            <section class="products list items product-items">
+                    <li class="item product product-item">
+                        <form class="donation-product-add-form"
+                              data-product-sku="<?= $block->escapeHtmlAttr($block->getSku()) ?>"
+                              data-delete-action="<?= $block->escapeUrl($block->getAddToCartUrl($block->getProductId(), true)) ?>"
+                              action="<?= $block->escapeUrl($block->getAddToCartUrl($block->getProductId())) ?>"
+                              method="post">
+
+                            <?php if (in_array($block->getProductId(), $donationProductInCheckoutIds)):?>
+                                <input type="hidden" name="actionMode" value="delete">
+                            <?php else:?>
+                                <input type="hidden" name="actionMode" value="add">
+                            <?php endif;?>
+
+                            <input type="hidden" name="product"
+                                   value="<?= /* @noEscape */ (int)$block->getProductId() ?>">
+
+                            <input type="hidden" name="title"
+                                   value="<?= $block->escapeHtmlAttr($block->getTitle())?>">
+
+                            <input type="hidden" name="description"
+                                   value="<?= $block->stripTags($block->getDescription())?>">
+
+                            <?= $block->getBlockHtml('formkey') ?>
+                            <div class="product-item-info ">
+                                <span class="product-image-container" style="width:240px;">
+                                    <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                                        <img class="product-image-photo" src="<?=$block->getProductImageUrl($block->getProductId(), $imageThumbnailId)->getImageUrl(); ?>" max-width="240" max-height="300" alt="<?=$block->getTitle()?>"></span>
+                                </span>
+                                <div class="product details product-item-details">
+                                    <strong class="product name product-item-name">
+                                           <?=$block->getTitle();?>
+                                    </strong>
+
+                                    <div class="product description">
+                                        <?=$block->getDescription();?>
+                                    </div>
+
+                                    <div class="product actions product-item-actions">
+                                        <div class="actions-primary">
+                                                <?php if (in_array($block->getProductId(), $donationProductInCheckoutIds)):?>
+                                                    <button type="submit" title="Remove to Cart" class="action tocart remove">
+                                                        <span><?=__("J'annule mon don")?></span>
+                                                    </button>
+                                                <?php else:?>
+                                                    <div class="input-amount">
+                                                        <input type="number" size="4" step="any" title="__('Amount')" class="input-text amount" data-validate="{required:true,'validate-greater-than-zero':true}" name="amount" value="<?=$block->getHelper()->getRoundedPrice($block->getAmount());?>"/>
+                                                    </div>
+                                                    <button type="submit" title="Add to Cart" class="action tocart primary">
+                                                        <span><?=__('Make a donation')?></span>
+                                                    </button>
+                                                <?php endif;?>
+
+                                            <div role="alert" class="messages">
+                                                <div class="message-success success message no-display"></div>
+                                                <div class="message-error error message no-display"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </form>
+                    </li>
+            </section>
+        </div>
+    </div>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "donation_product":
+            {
+                "cartForm":"form#form-validate",
+                "donationForm":".donation-product-add-form",
+                "messageError":".message-error",
+                "messageSuccess":".message-success",
+                "ajaxCart": <?=$block->isAjax() ? true : false;?>
+            }
+        }
+    }
+    </script>
+<?php endif;?>

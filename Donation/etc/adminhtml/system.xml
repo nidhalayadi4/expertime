@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="expertime" translate="label"  sortOrder="400">
+            <label>Expertime</label>
+        </tab>
+
+        <section id="donation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Donation</label>
+            <tab>expertime</tab>
+            <resource>Expertime_Donation::Donation_config</resource>
+            <group id="config" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Donation configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sku" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sku</label>
+                    <comment>Product sku for donation.</comment>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <comment>Donation title.</comment>
+                </field>
+                <field id="description" translate="label" sortOrder="40" type="editor" showInWebsite="1" showInStore="1" showInDefault="1" >
+                    <label>Description</label>
+                    <frontend_model>Expertime\Donation\Block\Adminhtml\System\Config\Editor</frontend_model>
+                    <comment>Donation description.</comment>
+                </field>
+                <field id="amount" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Amount of donation</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+            </group>
+        </section>
+
+    </system>
+</config>
